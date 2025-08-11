@@ -1,0 +1,434 @@
+
+:host {
+  --pe-primary: #10a37f;
+  --pe-primary-hover: #0d8f6b;
+  --pe-primary-light: rgba(16, 163, 127, 0.1);
+  --pe-bg-primary: rgb(255, 255, 255);
+  --pe-bg-secondary: rgb(247, 247, 248);
+  --pe-bg-hover: rgb(236, 236, 241);
+  --pe-text-primary: rgb(13, 13, 13);
+  --pe-text-secondary: rgb(102, 102, 102);
+  --pe-text-tertiary: rgb(142, 142, 160);
+  --pe-border: rgb(217, 217, 227);
+  --pe-border-light: rgb(236, 236, 241);
+  --pe-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --pe-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --pe-radius: 12px;
+  --pe-radius-lg: 12px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :host {
+    --pe-bg-primary: rgb(52, 53, 65);
+    --pe-bg-secondary: rgb(64, 65, 79);
+    --pe-bg-hover: rgb(72, 73, 87);
+    --pe-text-primary: rgb(236, 236, 241);
+    --pe-text-secondary: rgb(195, 195, 213);
+    --pe-text-tertiary: rgb(142, 142, 160);
+    --pe-border: rgb(86, 88, 105);
+    --pe-border-light: rgb(72, 73, 87);
+    --pe-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --pe-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.pe-root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--pe-text-primary);
+  position: relative;
+  pointer-events: auto;
+}
+
+/* Enhanced Button - ChatGPT Style */
+.pe-enhance-btn {
+  position: relative;
+  display: inline-flex;
+  margin-bottom: 10px;
+  margin-left: 120px;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  min-height: 32px;
+}
+
+/* Pulse animation for when there's input text */
+.pe-enhance-btn.pe-has-input {
+  /* Remove button animation */
+}
+
+.pe-enhance-btn.pe-has-input::before {
+  animation: pe-icon-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pe-icon-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+    filter: brightness(1.3);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Pause animation on hover */
+.pe-enhance-btn.pe-has-input:hover::before {
+  animation-play-state: paused;
+  transform: scale(1.1);
+}
+
+.pe-enhance-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--pe-radius);
+  opacity: 0.6;
+  transform: translateY(-1px);
+  box-shadow: var(--pe-shadow-lg);
+}
+
+.pe-enhance-btn:active {
+  transform: translateY(0);
+}
+
+.pe-enhance-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pe-enhance-btn::before {
+  content: "✨";
+  font-size: 14px;
+}
+
+.pe-enhance-btn.pe-busy {
+  pointer-events: none;
+}
+
+.pe-enhance-btn.pe-busy::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: pe-spin 1s linear infinite;
+}
+
+@keyframes pe-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pe-enhance-btn.pe-flash {
+  animation: pe-flash 0.5s ease;
+}
+
+@keyframes pe-flash {
+  50% {
+    background: #059669;
+    transform: scale(1.05);
+  }
+}
+
+/* Panel - Modern ChatGPT Card Style */
+.pe-panel {
+  position: absolute;
+  bottom: 45px;
+  right: 0;
+  width: 420px;
+  max-width: calc(100vw - 40px);
+  background: var(--pe-bg-primary);
+  border: 1px solid var(--pe-border);
+  border-radius: var(--pe-radius-lg);
+  box-shadow: var(--pe-shadow-lg);
+  backdrop-filter: blur(10px);
+  transform: translateY(10px) scale(0.95);
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.pe-panel:not(.pe-hidden) {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.pe-hidden {
+  display: none;
+}
+
+/* Panel Header */
+.pe-panel-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--pe-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.pe-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--pe-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pe-title::before {
+  content: "🚀";
+  font-size: 18px;
+}
+
+.pe-status {
+  font-size: 13px;
+  color: var(--pe-text-secondary);
+  background: var(--pe-bg-secondary);
+  padding: 4px 8px;
+  border-radius: 16px;
+  min-width: 60px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.pe-status:empty {
+  display: none;
+}
+
+/* Enhanced Textarea */
+.pe-output {
+  width: 100%;
+  min-height: 120px;
+  max-height: 200px;
+  padding: 16px 20px;
+  border: none;
+  background: var(--pe-bg-primary);
+  color: var(--pe-text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.pe-output::placeholder {
+  color: var(--pe-text-tertiary);
+}
+
+.pe-output:focus {
+  background: var(--pe-bg-secondary);
+}
+
+/* Action Buttons */
+.pe-actions {
+  padding: 12px 20px 16px;
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid var(--pe-border-light);
+  flex-shrink: 0;
+}
+
+/* Authentication Message */
+.pe-auth-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 20px;
+  gap: 16px;
+}
+
+.pe-auth-icon {
+  font-size: 32px;
+  opacity: 0.8;
+}
+
+.pe-auth-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pe-auth-text strong {
+  font-size: 16px;
+  color: var(--pe-text-primary);
+  font-weight: 600;
+}
+
+.pe-auth-text p {
+  margin: 0;
+  color: var(--pe-text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.pe-auth-btn {
+  background: var(--pe-accent-primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  margin-top: 8px;
+}
+
+.pe-auth-btn:hover {
+  background: var(--pe-accent-hover);
+}
+
+.pe-auth-btn:active {
+  transform: translateY(1px);
+}
+
+.pe-action-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--pe-border);
+  background: var(--pe-bg-primary);
+  color: var(--pe-text-primary);
+  border-radius: var(--pe-radius);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+}
+
+.pe-action-btn:hover {
+  background: var(--pe-bg-hover);
+  border-color: var(--pe-primary);
+  transform: translateY(-1px);
+}
+
+.pe-replace {
+  background: var(--pe-primary);
+  color: white;
+  border-color: var(--pe-primary);
+}
+
+.pe-replace:hover {
+  background: var(--pe-primary-hover);
+  border-color: var(--pe-primary-hover);
+}
+
+.pe-copy::before {
+  content: "📋";
+  font-size: 14px;
+}
+
+.pe-cancel::before {
+  content: "✕";
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .pe-panel {
+    width: calc(100vw - 40px);
+    max-width: none;
+    left: 20px !important;
+    right: 20px !important;
+  }
+
+  .pe-panel-header {
+    padding: 12px 16px 10px;
+  }
+
+  .pe-output {
+    padding: 12px 16px;
+    min-height: 100px;
+  }
+
+  .pe-actions {
+    padding: 10px 16px 12px;
+    flex-direction: column;
+  }
+
+  .pe-action-btn {
+    flex: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .pe-panel {
+    width: calc(100vw - 20px);
+    left: 10px !important;
+    right: 10px !important;
+  }
+
+  .pe-enhance-btn {
+    margin-left: 60px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+/* Integration with ChatGPT's composer */
+.pe-composer-integration {
+  position: absolute;
+  top: 8px;
+  right: 50px; /* Leave space for send button */
+  z-index: 10;
+}
+
+/* Tooltip */
+.pe-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  background: var(--pe-text-primary);
+  color: var(--pe-bg-primary);
+  font-size: 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.pe-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--pe-text-primary);
+}
+
+.pe-enhance-btn:hover .pe-tooltip {
+  opacity: 1;
+}

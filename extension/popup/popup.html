@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prompt Enhancer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="popup.css" />
+
+  </head>
+  <body>
+    <script src="popup.js"></script>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-icon">PE</div>
+        <h1 class="header-title">Prompt Enhancer</h1>
+      </header>
+
+      <!-- Status Card -->
+      <div class="status-card">
+        <div class="status-info">
+          <div class="status-indicator" id="statusIndicator"></div>
+          <span class="status-text" id="statusText">Extension Active</span>
+        </div>
+        <div class="toggle-switch active" id="toggleSwitch"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        <button class="btn btn-primary" id="settingsBtn">
+          <span>⚙️</span>
+          Settings
+        </button>
+        <button class="btn btn-secondary" id="historyBtn">
+          <span>📊</span>
+          History
+        </button>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats">
+        <div class="stat-item">
+          <div class="stat-number" id="enhancementsCount">0</div>
+          <div class="stat-label">Enhanced</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="quotaRemaining">--</div>
+          <div class="stat-label">Quota Left</div>
+        </div>
+      </div>
+
+      <!-- Keyboard Shortcut Info -->
+      <div class="shortcut-info">
+        <span class="shortcut-text"
+          >💡 Use keyboard shortcut for quick enhancement</span
+        >
+        <a href="#" class="shortcut-link" id="shortcutsLink">Configure</a>
+      </div>
+
+      <!-- Recent History -->
+      <section>
+        <h2 class="section-title">
+          <span>🔄</span>
+          Recent Enhancements
+        </h2>
+        <div class="history-container">
+          <div id="historyList">
+            <div class="empty-state">
+              <div class="empty-icon">💭</div>
+              <div>No enhancements yet</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+=
+  </body>
+</html>
