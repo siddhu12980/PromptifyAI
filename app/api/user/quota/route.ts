@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { NextRequest, NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/db";
@@ -39,6 +41,7 @@ interface EnhancedQuotaInfo extends QuotaInfo {
 
 // GET /api/user/quota - Get user's current quota information with separate tracking
 export async function GET(request: NextRequest) {
+  console.log("GET /api/user/quota", request.cookies.size || "no cookies");
   try {
     // Get authenticated user from Clerk
     const clerkUser = await currentUser();

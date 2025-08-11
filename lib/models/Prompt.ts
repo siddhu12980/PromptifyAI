@@ -136,6 +136,7 @@ PromptSchema.statics.getRecentByUser = function(userId: mongoose.Types.ObjectId,
 };
 
 // Static method for analytics (future use)
+/* eslint-disable @typescript-eslint/no-explicit-any */
 PromptSchema.statics.getAnalytics = function(filters: any = {}) {
   return this.aggregate([
     { $match: filters },

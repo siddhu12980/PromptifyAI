@@ -1,4 +1,4 @@
-# 🚀 PromptifyAI: AI Chat Assistant
+# 🚀 PromptifyAI: AI Chat, Prompt Enhancer Extension
 
 Transform your AI conversations with intelligent prompt enhancement. A complete solution with browser extension, web dashboard, and personal API key management.
 

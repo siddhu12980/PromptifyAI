@@ -14,7 +14,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,7 +26,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import {
   Sparkles,
@@ -38,7 +36,6 @@ import {
   DollarSign,
   TrendingUp,
   Copy,
-  ExternalLink,
   Activity,
   Users,
   Globe,
@@ -419,7 +416,7 @@ export default function Dashboard() {
             Welcome back, {data.user.name.split(" ")[0]}! 👋
           </h2>
           <p className="text-gray-600">
-            Here's your prompt enhancement activity and usage insights.
+            Here&apos;s your prompt enhancement activity and usage insights.
           </p>
         </div>
 
@@ -430,7 +427,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-emerald-600">
-                    Today's Enhancements
+                    Today&apos;s Enhancements
                   </p>
                   <p className="text-3xl font-bold text-emerald-900">
                     {data.usage.totalDailyUsage}
@@ -965,7 +962,7 @@ export default function Dashboard() {
               (
                 data.apiKeys[
                   `${editingProvider}KeyInfo` as keyof typeof data.apiKeys
-                ] as any
+                ] as { exists: boolean } | null
               )?.exists
                 ? `Edit ${
                     editingProvider === "openai" ? "OpenAI" : "Anthropic"
@@ -1085,8 +1082,8 @@ export default function Dashboard() {
             <AlertDialogDescription>
               Are you sure you want to delete your{" "}
               {deletingProvider === "openai" ? "OpenAI" : "Anthropic"} API key?
-              This will remove the key from your account and you'll need to add
-              it again to use personal API features.
+              This will remove the key from your account and you&apos;ll need to
+              add it again to use personal API features.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

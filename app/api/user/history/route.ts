@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextRequest, NextResponse } from "next/server";
 import { currentUser } from "@clerk/nextjs/server";
 import dbConnect from "@/lib/db";
@@ -330,8 +332,8 @@ export async function DELETE(request: NextRequest) {
     const provider = searchParams.get("provider"); // Delete all from specific provider
     const olderThan = searchParams.get("olderThan"); // Delete older than date (ISO string)
     const clearAll = searchParams.get("clearAll") === "true"; // Delete everything
-
-    let deleteQuery: any = { userId: user._id };
+    
+    const deleteQuery: any = { userId: user._id };
     let deletedCount = 0;
 
     if (promptId) {

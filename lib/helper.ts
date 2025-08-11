@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createDecipheriv } from "crypto";
-import dbConnect from "@/lib/db";
-import { User, Usage, Prompt } from "@/lib/models";
+import { User } from "@/lib/models";
 
 // Encryption configuration
 const ALGORITHM = "aes-256-gcm";
