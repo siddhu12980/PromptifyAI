@@ -1,7 +1,7 @@
-// Chrome API is available globally in service workers
+
 
 // ---------- Authentication Configuration ----------
-const API_BASE_URL = "http://localhost:3000"; // TODO: Update to production URL
+const API_BASE_URL = "https://promptifyai.100xsidd.me"; // TODO: Update to production URL
 const AUTH_ROUTES = {
   userProfile: `${API_BASE_URL}/api/user`,
   authRedirect: `${API_BASE_URL}/`, // Main site for Clerk authentication

@@ -27,6 +27,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+      <meta name="google-site-verification" content="EugK9zZn0r-OywsUPHXfsQmqMdJk5sdc13GyQYl-vCI" />
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
